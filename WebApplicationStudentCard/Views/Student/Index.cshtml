@@ -1,0 +1,188 @@
+﻿@model WebApplicationStudentCard.Models.Gradepage
+
+@{
+	ViewData["Title"] = "Index";
+}
+@{
+	Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+</head>
+
+<body>
+
+	<h2 class="text-success">Digital grade book </h2>
+
+	<div class="bg-secondary text-white  row">
+		<form asp-controller="Student" asp-action="Index">
+
+			<div class="form-group">
+				<label asp-for="Math" class="control-label">Math</label>
+				<input asp-for="Math" class="form-control" id="Math" name="Math" value="@Model.Math" min="1" max="100" onkeypress="return event.charCode >= 48 && event.charCode <= 57" required />
+			</div>
+
+			<div class="form-group">
+				<label asp-for="English" class="control-label">English</label>
+				<input asp-for="English" class="form-control" id="English" name="English" value="@Model.English" min="1" max="100" onkeypress="return event.charCode >= 48 && event.charCode <= 57" required />
+			</div>
+
+			<div class="form-group">
+				<label asp-for="History" class="control-label">History</label>
+				<input asp-for="History" class="form-control" id="History" name="History" value="@Model.History" min="1" max="100" onkeypress="return event.charCode >= 48 && event.charCode <= 57" required />
+			</div>
+
+			<div class="form-group">
+				<label asp-for="Civics" class="control-label">Civics</label>
+				<input asp-for="Civics" class="form-control" id="Civics" name="Civics" value="@Model.Civics" min="1" max="100" onkeypress="return event.charCode >= 48 && event.charCode <= 57" required />
+			</div>
+
+			<div class="form-group">
+				<label asp-for="Literature" class="control-label">Literature</label>
+				<input asp-for="Literature" class="form-control" id="Literature" name="Literature" value="@Model.Literature" min="1" max="100" onkeypress="return event.charCode >= 48 && event.charCode <= 57" required />
+			</div>
+
+			<br />
+			<br />
+			<br />
+			<hr />
+
+			<div class="form-group">
+				<label asp-for="Psychometric" class="control-label">Psychometric</label>
+				<input asp-for="Psychometric" class="form-control" id="Psychometric" name="Psychometric" value="@Model.Psychometric" min="200" max="800" onkeypress="return event.charCode >= 48 && event.charCode <= 57" maxlength="3" />
+			</div>
+
+			<input type="submit" class="btn btn-info" id="add" value="Get Statistices" />
+
+			<div>
+				<div class="flex-wrapper">
+					<label asp-for="Avg" class="control-label text-info">average grade</label>
+
+					<div class="single-chart">
+						<svg viewBox="0 0 36 36" class="circular-chart blue">
+							<path class="circle-bg"
+								  d="M18 2.0845
+                              a 15.9155 15.9155 0 0 1 0 31.831
+                              a 15.9155 15.9155 0 0 1 0 -31.831" />
+							<path class="circle"
+								  stroke-dasharray="@Model.Avg, 100"
+								  d="M18 2.0845
+                             a 15.9155 15.9155 0 0 1 0 31.831
+                             a 15.9155 15.9155 0 0 1 0 -31.831" />
+							<text x="18" y="20.35" class="percentage">@Model.Avg</text>
+						</svg>
+					</div>
+				</div>
+			</div>
+
+			<div class="form-group">
+				<label asp-for="Grade" class="control-label">Pass/Fail</label>
+				<label asp-for="Grade" class="form-control" id="Grade" name="Grade" value="@Model.Grade">@Model.Grade</label>
+			</div>
+
+			<div class="flex-wrapper">
+				<label asp-for="Lowest" class="control-label text-info">Lowest score</label>
+
+				<div class="single-chart">
+					<svg viewBox="0 0 36 36" class="circular-chart blue">
+						<path class="circle-bg"
+							  d="M18 2.0845
+                              a 15.9155 15.9155 0 0 1 0 31.831
+                              a 15.9155 15.9155 0 0 1 0 -31.831" />
+						<path class="circle"
+							  stroke-dasharray="@Model.Lowest, 100"
+							  d="M18 2.0845
+                             a 15.9155 15.9155 0 0 1 0 31.831
+                             a 15.9155 15.9155 0 0 1 0 -31.831" />
+						<text x="18" y="20.35" class="percentage">@Model.Lowest</text>
+					</svg>
+				</div>
+			</div>
+
+			<div class="flex-wrapper">
+				<label asp-for="Highest" class="control-label text-info">Highest score</label>
+
+				<div class="single-chart">
+					<svg viewBox="0 0 36 36" class="circular-chart blue">
+						<path class="circle-bg"
+							  d="M18 2.0845
+                              a 15.9155 15.9155 0 0 1 0 31.831
+                              a 15.9155 15.9155 0 0 1 0 -31.831" />
+						<path class="circle"
+							  stroke-dasharray="@Model.Highest, 100"
+							  d="M18 2.0845
+                             a 15.9155 15.9155 0 0 1 0 31.831
+                             a 15.9155 15.9155 0 0 1 0 -31.831" />
+						<text x="18" y="20.35" class="percentage">@Model.Highest</text>
+					</svg>
+				</div>
+			</div>
+
+			<div class="chart">
+				<ul class="numbers">
+					<li><span>100%</span></li>
+					<li><span>50%</span></li>
+					<li><span>0%</span></li>
+				</ul>
+				<ul class="bars">
+					<li><div class="bar" data-percentage="@Model.Math"></div><span>Math</span></li>
+					<li><div class="bar" data-percentage="@Model.English"></div><span>English</span></li>
+					<li><div class="bar" data-percentage="@Model.History"></div><span>History</span></li>
+					<li><div class="bar" data-percentage="@Model.Civics"></div><span>Civics</span></li>
+					<li><div class="bar" data-percentage="@Model.Literature"></div><span>Literature</span></li>
+					<li><div class="bar" data-percentage="@Model.Avg"></div><span class="text-info">Avarage</span></li>
+				</ul>
+			</div>
+
+			@section scripts
+				{
+				<script type="text/javascript">
+					$(function() {
+						$('.bars li .bar').each(function(key, bar) {
+							var percentage = $(this).data('percentage');
+							$(this).animate({
+								'height': percentage + '%'
+							}, 1000);
+						});
+					});
+				</script>
+			}
+
+				<br />
+				<br />
+				<br />
+				<hr />
+
+				<div class="flex-wrapper">
+					<label asp-for="Totalscore" class="control-label">Match scores Psychometric</label>
+
+					<div class="single-chart">
+						<svg viewBox="0 0 36 36" class="circular-chart green">
+							<path class="circle-bg"
+							  d="M18 2.0845
+                                 a 15.9155 15.9155 0 0 1 0 31.831
+                                a 15.9155 15.9155 0 0 1 0 -31.831" />
+							<path class="circle"
+							  stroke-dasharray="@Model.Totalscore, 800"
+							  d="M18 2.0845
+                             a 15.9155 15.9155 0 0 1 0 31.831
+                             a 15.9155 15.9155 0 0 1 0 -31.831" />
+							<text x="18" y="20.35" class="percentage">@Model.Totalscore</text>
+						</svg>
+					</div>
+				</div>
+
+				<div class="form-group">
+					<label asp-for="Study" class="control-label">Possible fields of study</label>
+					<label asp-for="Study" class="form-control" id="Study" name="Study" value="@Model.Study">@Model.Study</label>
+				</div>
+				<br />
+		</form>
+
+	</div>
+		<a asp-controller="Student" asp-action="Index" class="btn btn-success">cleaning board</a>
+
+</body>
+</html>
